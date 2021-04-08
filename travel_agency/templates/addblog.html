@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>travel agency</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+ <link rel="stylesheet" type="text/css" href="images">
+  <link rel="stylesheet" type="text/css" href="js/main.js">
+       <script src = "https://maps.googleapis.com/maps/api/js"></script>
+
+<style>
+  .navbar{
+background-image: url("static/blog.jpeg");
+ 
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  }
+  .contact{
+background-image: url("static/blog.jpeg");
+  min-height: 1050px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  }
+
+.contact{
+  background-color: lightgrey;
+
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* Needed to position the navbar */
+  position: relative;
+  padding-top:  10px;
+  
+  color:white;
+  font-size: 22px;
+  
+
+
+}
+.container{
+
+    width: 700px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+}
+#nab a{
+  background-color: black;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: bold;
+   padding: 15px 18px;
+    color:white;
+
+  }
+.navbar-nav a{
+    color: red;
+    float: right;
+  }
+.nav-item1{
+  padding-left: 1000px;
+}
+.input_field{
+  padding-left:1200px;
+}
+#del {
+padding-top: 10px;
+}
+.navbar-nav a:hover {
+  
+  color: red;
+  
+}
+
+.form-group input{
+  background-color: black;
+  color: white;
+}
+.form-group textarea{
+  background-color: black;
+  color: white;
+}
+
+.dropbtn {
+
+  color: white;
+  
+  background-color: black;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: bold;
+   padding: 15px 18px;
+    color:white;
+  
+}
+
+.dropdown {
+  position: relative;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: red;}
+        
+
+</style>
+
+</head>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-white ">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">
+    <img src="static/org.png" alt="logo" style="width:150px;">
+  </a>
+  
+  <!-- Links -->
+  <ul class="navbar-nav " id="nab">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('home') }}" >home </a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('contact') }}">contact</a>
+    </li>
+   <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('about') }}">about</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('gallery') }}">Gallery</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('login') }}">login </a>
+    </li>
+    <li class="nav-item">
+      <div class="dropdown">
+ <button class="dropbtn">blog</button>
+  <div class="dropdown-content">
+    <a href="{{ url_for('addblog') }}">add blog</a>
+    <a href="{{ url_for('update') }}">update blog</a>
+    <a href="{{ url_for('deleteblog') }}">delete blog</a>
+  </div>
+</div>
+    </li>
+
+  </ul>
+   </nav>
+  
+  <div class="contact">
+
+<div class="contact-form">
+ <div class="container">
+  <h1>add your blog here..</h1>
+
+  <form action="#" method="POST">
+
+   <div class="row" id="contact1">
+    
+    <div class="col-lg-8 col-md-8 col-sm-12 right">
+      <div class="form-group">
+        {{form.csrf_token}}   
+
+        <label for="userid">{{form.userid.label}}</label> <br>
+        {{form.userid(value=result.userid)}}<br>
+         
+       </div>
+
+      <div class="form-group">
+        
+
+        <label for="username">{{form.username.label}}</label> <br>
+        {{form.username(value=result.username)}}<br>
+         
+       </div>
+        <div class="form-group">
+       <label for="email">{{form.email.label}}</label> <br>
+        {{form.email(value=result.email)}}<br>
+         
+       </div>
+        <div class="form-group">
+          
+
+        <label for="blog_id">{{form.blog_id.label}}</label> <br>
+        {{form.blog_id()}}<br>
+         
+       </div>
+      
+       <div class="form-group">
+          
+
+        <label for="title">{{form.title.label}}</label> <br>
+        {{form.title()}}<br>
+         
+       </div>
+       
+       <div class="form-group">
+          
+
+        <label for="image">{{form.image.label}}</label> <br>
+        {{form.image()}}<br>
+         
+       </div>
+       <div class="form-group">
+           
+
+        <label for="description">{{form.description.label}}</label> <br>
+        {{form.description()}}<br>
+         
+       </div>
+      <div class="form-group">
+       <input type="submit" class="btn btn-secondary btn-block" value="Submit" name="">
+       <div class="form-group">
+    </div>
+   
+   
+  </form>
+ </div>
+</div></div>
+  </html>

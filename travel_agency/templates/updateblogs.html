@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>travel agency</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+ <link rel="stylesheet" type="text/css" href="images">
+  <link rel="stylesheet" type="text/css" href="js/main.js">
+       <script src = "https://maps.googleapis.com/maps/api/js"></script>
+
+<style>
+  .navbar{
+background-image: url("static/new4.jpeg");
+ 
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  }
+    #nab a{
+    font-size: 22px;
+    font-style: italic;
+    font-weight: bold;
+   padding: 15px 18px;
+    color:black;
+
+  }
+  .contact{
+background-image: url("static/blog.jpeg");
+  min-height: 850px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  }
+
+.contact{
+  background-color: lightgrey;
+
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* Needed to position the navbar */
+  position: relative;
+  padding-top:  10px;
+  
+  color:white;
+  font-size: 22px;
+  
+
+
+}
+#nab a{
+  background-color: black;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: bold;
+   padding: 15px 18px;
+    color:white;
+
+  }
+.navbar-nav a{
+    color: red;
+    float: right;
+  }
+.nav-item1{
+  padding-left: 1000px;
+}
+.input_field{
+  padding-left:1200px;
+}
+#del {
+padding-top: 10px;
+}
+.navbar-nav a:hover {
+  
+  color: red;
+  
+}
+
+.form-group input{
+  background-color: black;
+  color: white;
+}
+
+.form-group textarea{
+  background-color: black;
+  color: white;
+}
+
+   .dropbtn {
+  background :none;
+  color: black;
+  
+  font-size: 22px;
+  border: none;
+  
+    font-style: italic;
+    font-weight: bold;
+   padding: 15px 18px;
+  
+}
+
+.dropdown {
+  position: relative;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: red;}     
+.image label{
+	color: black;
+}
+</style>
+
+</head>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-white ">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">
+    <img src="static/org.png" alt="logo" style="width:150px;">
+  </a>
+  
+  <!-- Links -->
+  <ul class="navbar-nav " id="nab">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('home') }}" >home </a>
+    </li>
+    <li class="nav-item">
+     <div class="dropdown">
+  <button class="dropbtn">blog</button>
+  <div class="dropdown-content">
+    <a href="{{ url_for('addblogt') }}" >add blog</a>
+    <a href="{{ url_for('update') }}" >update blog</a>
+    <a href="{{ url_for('deleteblog') }}" >delete blog</a>
+  </div>
+</div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('contact') }}">contact</a>
+    </li>
+   <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('about') }}">about</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('gallery') }}">Gallery</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('login') }}">login </a>
+    </li>
+    
+
+  </ul>
+   </nav>
+  
+  <div class="contact">
+
+<div class="contact-form">
+ <div class="container">
+  <h1>update your blog here..</h1>
+
+  <form action="/updated" method="POST">
+
+   <div class="row" id="contact1">
+    
+    <div class="col-lg-8 col-md-8 col-sm-12 right">
+      <div class="form-group">
+         <input type="text" class="form-control form-control-lg" value="{{result.userid}}" placeholder="" name="userid1">
+       </div>
+       <div class="form-group">
+         <input type="text" class="form-control form-control-lg" value="{{result.blog_id}}" placeholder="" name="blog_id">
+       </div>
+       <div class="form-group">
+         <input type="text" class="form-control form-control-lg" value="{{result.email}}" placeholder="" name="email">
+       </div>
+      <div class="form-group">
+         <input type="text" class="form-control form-control-lg" placeholder="Your Name" value="{{result.username}}" name="name">
+       </div>
+       <div class="form-group">
+         <input type="text" class="form-control form-control-lg" value="{{result.title}}"placeholder="Title" name="title">
+       </div>
+       
+       <div class="form-group">
+        <label for="img" class="image">add an image:</label>
+  <input type="file" id="img" name="img" value="{{result.image}}" accept="image/*">
+       </div>
+       <div class="form-group">
+         <textarea class="form-control form-control-lg" value="{{result.text}}"name="text">enter the description
+          
+         </textarea>
+       </div>
+      <div class="form-group">
+       <button>update</button>
+       
+    </div>
+   
+   
+  </form>
+ </div>
+</div></div>
+  </html>
